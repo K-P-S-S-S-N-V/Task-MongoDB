@@ -520,7 +520,82 @@ Now we can find using this code to show related seperate collection.
 ---
 
 ## 5) Create a new collection which consists of students who scored below average and above 40% in all the categories.
+# New Collection for EXAM
+```python
+db = client.test
+gtltexam=db.gt40_ltavg_exam
+gtltexam.count_documents({})
+```
+Output:
+```
+23
+```
+```python
+gtltexam.drop()
+x=db.exam_collection.find({'scores.score':{'$gte':40,'$lt':48.67367075950175}})
+for i in x:
+  i=gtltexam.insert_many([i])
+  
+gtltexam.count_documents({})
+```
+Output:
+```
+23
+```
+# New Collection for Quiz
+```python
+db = client.test
+gtltquiz=db.gt40_ltavg_quiz
+gtltquiz.count_documents({})
+```
+Output:
+```
+19
+```
+```python
+gtltquiz.drop()
 
+x=db.quiz_collection.find({'scores.score':{'$gte':40,'$lt':48.67367075950175}})
+for i in x:
+  i=gtltquiz.insert_many([i])
+  
+gtltquiz.count_documents({})
+```
+Output:
+```
+19
+```
+# New Collection for Homework
+```python
+db = client.test
+gtlthomework=db.gt40_ltavg_homework
+gtlthomework.count_documents({})
+```
+Output:
+```
+14
+```
+```python
+gtlthomework.drop()
+
+x=db.homework_collection.find({'scores.score':{'$gte':40,'$lt':48.67367075950175}})
+for i in x:
+  i=gtlthomework.insert_many([i])
+  
+gtlthomework.count_documents({})
+```
+Output:
+```
+14
+```
+Here,
+we can
+
+#db.gt40_ltavg_exam....this shows the collection which consists of students who scored below average and above 40% in exam.
+#db.gt40_ltavg_quiz....this shows the collection which consists of students who scored below average and above 40% in quiz.
+#db.gt40_ltavg_homework....this shows the collection which consists of students who scored below average and above 40% in homework.
+---
+## 6) Create a new collection which consists of students who scored below the fail mark in all the categories.
 
 
 
