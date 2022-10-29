@@ -18,7 +18,7 @@
 This is the code to Run MongoDB Server On Google Colaboratory and answering the Queries related to Available student.json Dataset from MongoDB.
 
 
-## First Install pymongo server Library in Google Colaboratory
+## First Install pymongo Library in Google Colaboratory
 ```python
 ! python -m pip install pymongo==3.7.2
 ```
