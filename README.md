@@ -91,6 +91,294 @@ Processing triggers for libc-bin (2.27-3ubuntu1.6) ...
  * Starting database mongodb
    ...done.
 ```
+## Insert Data
+```python
+x=records2.insert_many(data)           #to insert no.of available data in student.json file
+print(x.inserted_ids)                  #print to see what are the ID's that are available for student data in student.json file
+```
+Output:
+```
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199]
+```
+## To Count uploaded Record
+```python
+records2.count_documents({})      #Code to check how many total students are available 
+```
+Output:
+```
+200
+```
+##  To find Start data
+```python
+records2.find_one()      #to find Student data
+```
+Output:
+(From student.json file)
+```
+{'_id': 0,
+ 'name': 'aimee Zank',
+ 'scores': [{'score': 1.463179736705023, 'type': 'exam'},
+  {'score': 11.78273309957772, 'type': 'quiz'},
+  {'score': 35.8740349954354, 'type': 'homework'}]}
+```
+---
+## Now Let us Answer to the Questions
+
+## 1) Find the student name who scored maximum scores in all (exam, quiz and homework)?
+# student who score highest score in exam
+```python
+db = client.test
+exam=db.exam_collection              #Total no.of Exam documents count 
+exam.count_documents({})
+```
+Output:
+```
+200
+```
+```python
+exam.drop()
+
+for j in range(200):
+  x=records2.aggregate([{"$match":{"_id":j}},{"$unwind":"$scores"},{"$match":{"scores.type":"exam"}},{"$sort":{"scores.score":-1}}])
+  for i in x:
+    i=exam.insert_many([i])
+
+s=exam.find().sort('scores.score',-1).limit(1) 
+for i in s:
+  print(i)                              
+```
+Output:
+```
+{'_id': 136, 'name': 'Margart Vitello', 'scores': {'score': 99.33685767140612, 'type': 'exam'}}
+```
+# student who score highest score in quiz
+```python
+db = client.test
+quiz=db.quiz_collection
+quiz.count_documents({})                         #Total no.of Quiz documents count 
+```
+Output:
+```
+200
+```
+```python
+quiz.drop()
+
+for j in range(200):
+  x=records2.aggregate([{"$match":{"_id":j}},{"$unwind":"$scores"},{"$match":{"scores.type":"quiz"}},{"$sort":{"scores.score":-1}}])
+  for i in x:
+    i=quiz.insert_many([i])
+
+s=quiz.find().sort('scores.score',-1).limit(1)
+for i in s:
+  print(i)                               
+```
+Output:
+```
+{'_id': 69, 'name': 'Cody Strouth', 'scores': {'score': 99.80348240553108, 'type': 'quiz'}}
+```
+# student who score highest score in homework
+```python
+db = client.test
+homework=db.homework_collection
+homework.count_documents({})                     #Total no.of Homwwork documents counts 
+```
+Output:
+```
+200
+```
+```python
+homework.drop()
+
+for j in range(200):
+  x=records2.aggregate([{"$match":{"_id":j}},{"$unwind":"$scores"},{"$match":{"scores.type":"homework"}},{"$sort":{"scores.score":-1}}])
+  for i in x:
+    i=homework.insert_many([i])
+   
+s=homework.find().sort('scores.score',-1).limit(1)
+for i in s:
+  print(i)                                #student who score highest score in homework
+```
+Output:
+```
+{'_id': 178, 'name': 'Whitley Fears', 'scores': {'score': 99.77237745070993, 'type': 'homework'}}
+```
+so, from here,
+we got know about
+
+## max score in exam is 'Margart Vitello'
+{'_id': 136, 'name': 'Margart Vitello', 'scores': {'score': 99.33685767140612, 'type': 'exam'}}
+
+## max score in quiz s 'Cody Strouth'
+{'_id': 69, 'name': 'Cody Strouth', 'scores': {'score': 99.80348240553108, 'type': 'quiz'}}
+
+## max score in homework is 'Whitley Fears'
+{'_id': 178, 'name': 'Whitley Fears', 'scores': {'score': 99.77237745070993, 'type': 'homework'}}
+
+---
+## 2)Find students who scored below average in the exam and pass mark is 40%?
+
+# first we need to find Avg score in Exam
+```python
+
+x=db.exam_collection.aggregate([{'$group' : {'_id' : "null", "avg_exam" : {'$avg' : "$scores.score"}}}])
+for i in x:
+  print(i)
+```
+Output:
+```
+{'_id': 'null', 'avg_exam': 48.67367075950175}
+```
+```python
+db = client.test
+lessavg=db.lessavg_collection
+lessavg.count_documents({})  # total find no.of students with lessavg score  
+```
+Output:
+```
+104
+```
+# To find less than/ below average score in Exam
+```python
+lessavg.drop()
+
+x=db.exam_collection.find({'scores.score':{'$lt':48.67367075950175} })
+for i in x:
+  i=lessavg.insert_many([i])
+  
+lessavg.count_documents({})
+```
+Output:
+```
+104
+```
+---
+## 3) Find students who scored below pass mark and assigned them as fail, and above pass mark as pass in all the categories.
+
+# Students who Fail in EXAM
+```python
+db = client.test
+failexam=db.fail_exam
+failexam.count_documents({})
+```
+Output:
+```
+81
+```
+```python
+failexam.drop()
+
+x=db.exam_collection.find(
+    {'scores.score':{'$lt':40}
+     }
+)
+for i in x:
+  i=failexam.insert_many([i])
+  #print(i)
+  
+failexam.count_documents({})
+```
+Output:
+```
+81
+```
+# Students who Pass in EXAM
+```python
+db = client.test
+passexam=db.pass_exam
+passexam.count_documents({})
+```
+Output:
+```
+119
+```
+```python
+passexam.drop()
+
+x=db.exam_collection.find(
+    {'scores.score':{'$gte':40}
+     }
+)
+for i in x:
+  i=passexam.insert_many([i])
+
+passexam.count_documents({})
+```
+Output:
+```
+119
+```
+# Students who Fail in Quiz
+```python
+db = client.test
+failquiz=db.fail_quiz
+failquiz.count_documents({})
+```
+Output:
+```
+86
+```
+```python
+failquiz.drop()
+
+x=db.quiz_collection.find(
+    {'scores.score':{'$lt':40}
+     }
+)
+for i in x:
+  i=failquiz.insert_many([i])
+
+failquiz.count_documents({})
+```
+Output:
+```
+86
+```
+# Students who Pass in Quiz
+```python
+db = client.test
+passquiz=db.pass_quiz
+passquiz.count_documents({})
+```
+Output:
+```
+114
+```
+```python
+passquiz.drop()
+
+x=db.quiz_collection.find(
+    {'scores.score':{'$gte':40}
+     }
+)
+for i in x:
+  i=passquiz.insert_many([i])
+
+passquiz.count_documents({})
+```
+Output:
+```
+114
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 The Wasmtime CLI can be installed on Linux and macOS with a small install
 script:
 
