@@ -360,6 +360,166 @@ Output:
 ```
 114
 ```
+# Students who fail in Homework
+```python
+db = client.test
+failhomework=db.fail_homework
+failhomework.count_documents({})
+```
+Output:
+```
+29
+```
+```python
+failhomework.drop()
+
+x=db.homework_collection.find(
+    {'scores.score':{'$lt':40}
+     }
+)
+for i in x:
+  i=failhomework.insert_many([i])
+  
+  
+failhomework.count_documents({})
+```
+Output:
+```
+29
+```
+# Students who Pass Home work
+```python
+db = client.test
+passhomework=db.pass_homework
+passhomework.count_documents({})
+```
+Output:
+```
+171
+```
+```python
+passhomework.drop()
+
+x=db.homework_collection.find(
+    {'scores.score':{'$gte':40}
+     }
+)
+for i in x:
+  i=passhomework.insert_many([i])
+  
+passhomework.count_documents({})
+```
+Output:
+```
+171
+```
+Now Here,
+#db.fail_exam, db.fail_quiz, db.fail_homework....shows who scored below passmark and assingned the collection as fail in all the categories
+#db.pass_exam, db.pass_quiz, db.pass_homework....shows who scored above passmark and assingned the collection as pass in all the categories
+---
+## 4) Find the total and average of the exam, quiz and homework and store them in a separate collection.
+
+# Total and Average of Exam 
+```python
+db = client.test
+exam1=db.exam
+exam1.count_documents({})
+```
+Output:
+```
+2
+```
+```python
+exam1.drop()
+
+x= db.exam_collection.aggregate([{"$match": {"scores.type":"exam"}},{ "$unwind":"$scores"},{"$match": { "scores.type":"exam" } },{"$group": {
+       "_id": 'total_score_exam',
+       "total_score": { "$sum": "$scores.score" } }}])
+for i in x:
+  i=exam1.insert_many([i])
+  print(i)
+
+x=db.exam_collection.aggregate([{'$group' : {'_id' : "avg_score_exam", "avg_score" : {'$avg' : "$scores.score"}}}])
+for i in x:
+  i=exam1.insert_many([i])
+  print(i)
+  
+exam1.count_documents({})
+```
+Output:
+```
+2
+```
+# Total and Average of Quiz
+```pythoon
+db = client.test
+quiz1=db.quiz
+quiz1.count_documents({})
+```
+Output:
+```
+2
+```
+```python
+quiz1.drop()
+
+x= db.quiz_collection.aggregate([{"$match": {"scores.type":"quiz"}},{ "$unwind":"$scores"},{"$match": { "scores.type":"quiz" } },{"$group": {
+       "_id": 'total_score_quiz',
+       "total_score": { "$sum": "$scores.score" } }}])
+for i in x:
+  i=quiz1.insert_many([i])
+  print(i)
+  
+x=db.quiz_collection.aggregate([{'$group' : {'_id' : "avg_score_quiz", "avg_score" : {'$avg' : "$scores.score"}}}])
+for i in x:
+  i=quiz1.insert_many([i])
+  print(i)
+
+quiz1.count_documents({})
+```
+Output:
+```
+2
+```
+# Total and Average for Homework
+```python
+db = client.test
+homework1=db.homework
+homework1.count_documents({})
+```
+Output:
+```
+2
+```
+```python
+homework1.drop()
+
+x= db.homework_collection.aggregate([{"$match": {"scores.type":"homework"}},{ "$unwind":"$scores"},{"$match": { "scores.type":"homework" } },{"$group": {
+       "_id": 'total_score_homework',
+       "total_score": { "$sum": "$scores.score" } }}])
+for i in x:
+  i=homework1.insert_many([i])
+  print(i)
+
+x=db.homework_collection.aggregate([{'$group' : {'_id' : "avg_score_homework", "avg_score" : {'$avg' : "$scores.score"}}}])
+for i in x:
+  i=homework1.insert_many([i])
+  print(i)
+  
+homework1.count_documents({})
+```
+Output:
+```
+2
+```
+Here,
+Now we can find using this code to show related seperate collection.
+# db.exam....this collection shows the total and average of the exam
+# db.quiz....this collection shows the total and average of the quiz 
+# db.homework....this collection shows the total and average of the homeework
+---
+
+## 5) Create a new collection which consists of students who scored below average and above 40% in all the categories.
 
 
 
