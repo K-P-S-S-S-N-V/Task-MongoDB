@@ -18,89 +18,44 @@
 This is the code to Run MongoDB Server On Google Colaboratory and answering the Queries related to Available student.json Dataset from MongoDB.
 
 
-## First Install " dnspython " and " pymongo server " in Google Colaboratory
+## First Install pymongo server Library in Google Colaboratory
 ```python
-!apt install mongodb
-!service mongodb start
+! python -m pip install pymongo==3.7.2
 ```
 Output:
 ```
-Reading package lists... Done
-Building dependency tree       
-Reading state information... Done
-The following package was automatically installed and is no longer required:
-  libnvidia-common-460
-Use 'apt autoremove' to remove it.
-The following additional packages will be installed:
-  libpcap0.8 libstemmer0d libyaml-cpp0.5v5 mongo-tools mongodb-clients
-  mongodb-server mongodb-server-core
-The following NEW packages will be installed:
-  libpcap0.8 libstemmer0d libyaml-cpp0.5v5 mongo-tools mongodb mongodb-clients
-  mongodb-server mongodb-server-core
-0 upgraded, 8 newly installed, 0 to remove and 29 not upgraded.
-Need to get 53.1 MB of archives.
-After this operation, 215 MB of additional disk space will be used.
-Get:1 http://archive.ubuntu.com/ubuntu bionic-updates/main amd64 libpcap0.8 amd64 1.8.1-6ubuntu1.18.04.2 [118 kB]
-Get:2 http://archive.ubuntu.com/ubuntu bionic/main amd64 libstemmer0d amd64 0+svn585-1build1 [62.5 kB]
-Get:3 http://archive.ubuntu.com/ubuntu bionic/universe amd64 libyaml-cpp0.5v5 amd64 0.5.2-4ubuntu1 [150 kB]
-Get:4 http://archive.ubuntu.com/ubuntu bionic/universe amd64 mongo-tools amd64 3.6.3-0ubuntu1 [12.3 MB]
-Get:5 http://archive.ubuntu.com/ubuntu bionic-updates/universe amd64 mongodb-clients amd64 1:3.6.3-0ubuntu1.4 [20.2 MB]
-Get:6 http://archive.ubuntu.com/ubuntu bionic-updates/universe amd64 mongodb-server-core amd64 1:3.6.3-0ubuntu1.4 [20.3 MB]
-Get:7 http://archive.ubuntu.com/ubuntu bionic-updates/universe amd64 mongodb-server all 1:3.6.3-0ubuntu1.4 [12.6 kB]
-Get:8 http://archive.ubuntu.com/ubuntu bionic-updates/universe amd64 mongodb amd64 1:3.6.3-0ubuntu1.4 [10.2 kB]
-Fetched 53.1 MB in 1s (61.0 MB/s)
-Selecting previously unselected package libpcap0.8:amd64.
-(Reading database ... 123942 files and directories currently installed.)
-Preparing to unpack .../0-libpcap0.8_1.8.1-6ubuntu1.18.04.2_amd64.deb ...
-Unpacking libpcap0.8:amd64 (1.8.1-6ubuntu1.18.04.2) ...
-Selecting previously unselected package libstemmer0d:amd64.
-Preparing to unpack .../1-libstemmer0d_0+svn585-1build1_amd64.deb ...
-Unpacking libstemmer0d:amd64 (0+svn585-1build1) ...
-Selecting previously unselected package libyaml-cpp0.5v5:amd64.
-Preparing to unpack .../2-libyaml-cpp0.5v5_0.5.2-4ubuntu1_amd64.deb ...
-Unpacking libyaml-cpp0.5v5:amd64 (0.5.2-4ubuntu1) ...
-Selecting previously unselected package mongo-tools.
-Preparing to unpack .../3-mongo-tools_3.6.3-0ubuntu1_amd64.deb ...
-Unpacking mongo-tools (3.6.3-0ubuntu1) ...
-Selecting previously unselected package mongodb-clients.
-Preparing to unpack .../4-mongodb-clients_1%3a3.6.3-0ubuntu1.4_amd64.deb ...
-Unpacking mongodb-clients (1:3.6.3-0ubuntu1.4) ...
-Selecting previously unselected package mongodb-server-core.
-Preparing to unpack .../5-mongodb-server-core_1%3a3.6.3-0ubuntu1.4_amd64.deb ...
-Unpacking mongodb-server-core (1:3.6.3-0ubuntu1.4) ...
-Selecting previously unselected package mongodb-server.
-Preparing to unpack .../6-mongodb-server_1%3a3.6.3-0ubuntu1.4_all.deb ...
-Unpacking mongodb-server (1:3.6.3-0ubuntu1.4) ...
-Selecting previously unselected package mongodb.
-Preparing to unpack .../7-mongodb_1%3a3.6.3-0ubuntu1.4_amd64.deb ...
-Unpacking mongodb (1:3.6.3-0ubuntu1.4) ...
-Setting up libstemmer0d:amd64 (0+svn585-1build1) ...
-Setting up libyaml-cpp0.5v5:amd64 (0.5.2-4ubuntu1) ...
-Setting up mongodb-server-core (1:3.6.3-0ubuntu1.4) ...
-Setting up libpcap0.8:amd64 (1.8.1-6ubuntu1.18.04.2) ...
-Setting up mongodb-clients (1:3.6.3-0ubuntu1.4) ...
-Setting up mongodb-server (1:3.6.3-0ubuntu1.4) ...
-invoke-rc.d: could not determine current runlevel
-invoke-rc.d: policy-rc.d denied execution of start.
-Created symlink /etc/systemd/system/multi-user.target.wants/mongodb.service → /lib/systemd/system/mongodb.service.
-Setting up mongo-tools (3.6.3-0ubuntu1) ...
-Setting up mongodb (1:3.6.3-0ubuntu1.4) ...
-Processing triggers for systemd (237-3ubuntu10.56) ...
-Processing triggers for man-db (2.8.3-2ubuntu0.1) ...
-Processing triggers for libc-bin (2.27-3ubuntu1.6) ...
- * Starting database mongodb
-   ...done.
+Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/
+Collecting pymongo==3.7.2
+  Downloading pymongo-3.7.2-cp37-cp37m-manylinux1_x86_64.whl (406 kB)
+     |████████████████████████████████| 406 kB 5.2 MB/s 
+Installing collected packages: pymongo
+  Attempting uninstall: pymongo
+    Found existing installation: pymongo 4.3.2
+    Uninstalling pymongo-4.3.2:
+      Successfully uninstalled pymongo-4.3.2
+Successfully installed pymongo-3.7.2
 ```
+#importing MongoDB in the from using library pymongo
+
+Note:
+The link below is a cluster that was created from https://cloud.mongodb.com/ .After, Registeting in MongoDB cloud services we have to create a Database & Collection then we have to create a cluster that was useful in connecting the Command Line Interface.
+```python
+import pymongo
+from pymongo import MongoClient
+client=pymongo.MongoClient('mongodb+srv://poornavenkatk:143143@cluster1.ycchv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+db = client.test
+```
+
+---
+---
 # STUDENT DATA BASE: student.json
+---
+---
 ## Creating database/collection and uploading student.json file in it
 ```python
 db = client.test
 records1=db.test_collection1
 records1.count_documents({})
-```
-Output:
-```
-200
 ```
 ```python
 records1.drop()
@@ -777,7 +732,153 @@ db.gt_pass_quiz.......this new collection which consists of students who scored 
 db.gt_pass_homework...this new collection which consists of students who scored above pass mark in homework
 
 ---
-#
+---
+# Telephone Directory CRUD Operation
+---
+---
+#creating New Records named "record2" and New Collection named "collection2"
+```python
+records2=db.test_collection2   #New
+records2.count_documents()
+```
+Output:
+```
+0
+```
+## C = CREATE 
+```python
+
+#INSERT MANY
+mylist=[{'_id':001,'Name':'Rajiv','Phone number':8795371205,'Place':'mumbai'},
+        {'_id':002,'Name':'Guvi Head Office','Phone number':6498026842,'Place':'chennai'},
+        {'_id':003,'Name':'Rava babu','Phone number':9943672916,'Place':'Delhi'},
+        {'_id':004,'Name':'Lokeswara rao','Phone number':6643269867,'Place':'Visakhapatnam'},
+        {'_id':005,'Name':'Rajasekar','Phone number':9844423861,'Place':'Hyderabad'},
+        {'_id':006,'Name':'Shirisha','Phone number':8854327694,'Place':'chennai'},
+        {'_id':007,'Name':'Venkatesh','Phone number':9442652872'Place':'Chennai'},
+        {'_id':008,'Name':'Rohit','Phone number':6449878726,'Place':'Visakhapatnam'},
+        {'_id':009,'Name':'Guvimentor','Phone number':9866365689,'Place':'Chennai'},
+        ]
+x=records2.insert_many(mylist)
+print(x.inserted_ids)
+```
+Output:
+```
+[1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+```python
+#INSERT ONE
+x={'_id':010,'Name':'Sarojini','Phone number':7545989031,'Place':'Visakhapatnam'}
+y=records2.insert_one(x)
+print(y.inserted_id)
+```
+Output:
+```
+10
+```
+## R = RETRIEVE
+```python
+# find all 
+x=db.test_collection2.find()
+for i in x:
+  print(i)
+```
+Output:
+```
+{'_id':001,'Name':'Rajiv','Phone number':8795371205,'Place':'mumbai'}
+{'_id':002,'Name':'Guvi Head Office','Phone number':6498026842,'Place':'chennai'}
+{'_id':003,'Name':'Rava babu','Phone number':9943672916,'Place':'Delhi'}
+{'_id':004,'Name':'Lokeswara rao','Phone number':6643269867,'Place':'Visakhapatnam'}
+{'_id':005,'Name':'Rajasekar','Phone number':9844423861,'Place':'Hyderabad'}
+{'_id':006,'Name':'Shirisha','Phone number':8854327694,'Place':'chennai'}
+{'_id':007,'Name':'Venkatesh','Phone number':9442652872'Place':'Chennai'}
+{'_id':008,'Name':'Rohit','Phone number':6449878726,'Place':'Visakhapatnam'}
+{'_id':009,'Name':'Guvimentor','Phone number':9866365689,'Place':'Chennai'}
+{'_id':010,'Name':'Sarojini','Phone number':7545989031,'Place':'Visakhapatnam'}
+```
+```python
+# to find_one()
+
+x={'_id':003}
+db.test_collection2.find_one(x)
+```
+Output:
+```
+{'Name':'Rava babu',
+'Phone number':9943672916,
+'Place':'Delhi'
+'_id': 003},
+```
+```python
+# Find by using Name or Place or Phone Number
+
+myquery={'Place':'Chennai'}
+mydoc=db.test_collection2.find(myquery,{'_id':0,'Place':0})
+for x in mydoc:
+  print(x)
+```
+Output:
+```
+{'Name': 'Guvi Head Office','Phone number': 6498026842}
+{'Name': 'Shirisha','Phone number': 8854327694}
+{'Name': 'Venkatesh','Phone number': 9442652872}
+{'Name': 'Guvimentor','Phone number': 9866365689}
+```
+## U = UPDATE
+```python
+#update one
+myquery={"Name":"Rohit"}
+newvalues={"$set":{"Name":"Rohit Mortha"}}
+records2.update_one(myquery,newvalues)
+for x in records2.find():
+  print(x)
+```
+Output:
+```
+{'_id':001,'Name':'Rajiv','Phone number':8795371205,'Place':'mumbai'}
+{'_id':002,'Name':'Guvi Head Office','Phone number':6498026842,'Place':'chennai'}
+{'_id':003,'Name':'Rava babu','Phone number':9943672916,'Place':'Delhi'}
+{'_id':004,'Name':'Lokeswara rao','Phone number':6643269867,'Place':'Visakhapatnam'}
+{'_id':005,'Name':'Rajasekar','Phone number':9844423861,'Place':'Hyderabad'}
+{'_id':006,'Name':'Shirisha','Phone number':8854327694,'Place':'chennai'}
+{'_id':007,'Name':'Venkatesh','Phone number':9442652872'Place':'Chennai'}
+{'_id':008,'Name':'Rohit Mortha','Phone number':6449878726,'Place':'Visakhapatnam'}
+{'_id':009,'Name':'Guvimentor','Phone number':9866365689,'Place':'Chennai'}
+{'_id':010,'Name':'Sarojini','Phone number':7545989031,'Place':'Visakhapatnam'}
+```
+## D = DELETE
+```python
+# Delete one
+myquery={'_id':5}
+records.delete_one(myquery)
+for x in records.find():
+  print(x)
+```
+Output:
+```
+{'_id':001,'Name':'Rajiv','Phone number':8795371205,'Place':'mumbai'}
+{'_id':002,'Name':'Guvi Head Office','Phone number':6498026842,'Place':'chennai'}
+{'_id':003,'Name':'Rava babu','Phone number':9943672916,'Place':'Delhi'}
+{'_id':004,'Name':'Lokeswara rao','Phone number':6643269867,'Place':'Visakhapatnam'}
+{'_id':006,'Name':'Shirisha','Phone number':8854327694,'Place':'chennai'}
+{'_id':007,'Name':'Venkatesh','Phone number':9442652872'Place':'Chennai'}
+{'_id':008,'Name':'Rohit Mortha','Phone number':6449878726,'Place':'Visakhapatnam'}
+{'_id':009,'Name':'Guvimentor','Phone number':9866365689,'Place':'Chennai'}
+{'_id':010,'Name':'Sarojini','Phone number':7545989031,'Place':'Visakhapatnam'}
+```
+```python
+records2=db.test_collection2
+records2.count_documents()
+```
+Output:
+```
+9
+```
+
+```python
+db.test_collection2.drop()
+```
+
 
 
 
