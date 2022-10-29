@@ -55,7 +55,7 @@ db = client.test
 ```python
 db = client.test
 records1=db.test_collection1
-records1.count_documents({})
+records1.count_documents()
 ```
 ```python
 records1.drop()
@@ -86,7 +86,7 @@ Output:
 ```
 ## To Count uploaded Record
 ```python
-records1.count_documents({})      #Code to check how many total students are available 
+records1.count_documents()      #Code to check how many total students are available 
 ```
 Output:
 ```
@@ -113,7 +113,7 @@ Output:
 ```python
 db = client.test
 exam=db.exam_collection              #Total no.of Exam documents count 
-exam.count_documents({})
+exam.count_documents()
 ```
 Output:
 ```
@@ -139,7 +139,7 @@ Output:
 ```python
 db = client.test
 quiz=db.quiz_collection
-quiz.count_documents({})                         #Total no.of Quiz documents count 
+quiz.count_documents()                         #Total no.of Quiz documents count 
 ```
 Output:
 ```
@@ -165,7 +165,7 @@ Output:
 ```python
 db = client.test
 homework=db.homework_collection
-homework.count_documents({})                     #Total no.of Homwwork documents counts 
+homework.count_documents()                     #Total no.of Homwwork documents counts 
 ```
 Output:
 ```
@@ -216,7 +216,7 @@ Output:
 ```python
 db = client.test
 lessavg=db.lessavg_collection
-lessavg.count_documents({})  # total find no.of students with lessavg score  
+lessavg.count_documents()  # total find no.of students with lessavg score  
 ```
 Output:
 ```
@@ -230,7 +230,7 @@ x=db.exam_collection.find({'scores.score':{'$lt':48.67367075950175} })
 for i in x:
   i=lessavg.insert_many([i])
   
-lessavg.count_documents({})
+lessavg.count_documents()
 ```
 Output:
 ```
@@ -243,7 +243,7 @@ Output:
 ```python
 db = client.test
 failexam=db.fail_exam
-failexam.count_documents({})
+failexam.count_documents()
 ```
 Output:
 ```
@@ -260,7 +260,7 @@ for i in x:
   i=failexam.insert_many([i])
   #print(i)
   
-failexam.count_documents({})
+failexam.count_documents()
 ```
 Output:
 ```
@@ -270,7 +270,7 @@ Output:
 ```python
 db = client.test
 passexam=db.pass_exam
-passexam.count_documents({})
+passexam.count_documents()
 ```
 Output:
 ```
@@ -286,7 +286,7 @@ x=db.exam_collection.find(
 for i in x:
   i=passexam.insert_many([i])
 
-passexam.count_documents({})
+passexam.count_documents()
 ```
 Output:
 ```
@@ -296,7 +296,7 @@ Output:
 ```python
 db = client.test
 failquiz=db.fail_quiz
-failquiz.count_documents({})
+failquiz.count_documents()
 ```
 Output:
 ```
@@ -312,7 +312,7 @@ x=db.quiz_collection.find(
 for i in x:
   i=failquiz.insert_many([i])
 
-failquiz.count_documents({})
+failquiz.count_documents()
 ```
 Output:
 ```
@@ -322,7 +322,7 @@ Output:
 ```python
 db = client.test
 passquiz=db.pass_quiz
-passquiz.count_documents({})
+passquiz.count_documents()
 ```
 Output:
 ```
@@ -338,7 +338,7 @@ x=db.quiz_collection.find(
 for i in x:
   i=passquiz.insert_many([i])
 
-passquiz.count_documents({})
+passquiz.count_documents()
 ```
 Output:
 ```
@@ -348,7 +348,7 @@ Output:
 ```python
 db = client.test
 failhomework=db.fail_homework
-failhomework.count_documents({})
+failhomework.count_documents()
 ```
 Output:
 ```
@@ -365,7 +365,7 @@ for i in x:
   i=failhomework.insert_many([i])
   
   
-failhomework.count_documents({})
+failhomework.count_documents()
 ```
 Output:
 ```
@@ -375,7 +375,7 @@ Output:
 ```python
 db = client.test
 passhomework=db.pass_homework
-passhomework.count_documents({})
+passhomework.count_documents()
 ```
 Output:
 ```
@@ -391,7 +391,7 @@ x=db.homework_collection.find(
 for i in x:
   i=passhomework.insert_many([i])
   
-passhomework.count_documents({})
+passhomework.count_documents()
 ```
 Output:
 ```
@@ -408,7 +408,7 @@ db.pass_exam, db.pass_quiz, db.pass_homework....shows who scored above passmark 
 ```python
 db = client.test
 exam1=db.exam
-exam1.count_documents({})
+exam1.count_documents()
 ```
 Output:
 ```
@@ -429,7 +429,7 @@ for i in x:
   i=exam1.insert_many([i])
   print(i)
   
-exam1.count_documents({})
+exam1.count_documents()
 ```
 Output:
 ```
@@ -439,7 +439,7 @@ Output:
 ```pythoon
 db = client.test
 quiz1=db.quiz
-quiz1.count_documents({})
+quiz1.count_documents()
 ```
 Output:
 ```
@@ -460,7 +460,7 @@ for i in x:
   i=quiz1.insert_many([i])
   print(i)
 
-quiz1.count_documents({})
+quiz1.count_documents()
 ```
 Output:
 ```
@@ -470,7 +470,7 @@ Output:
 ```python
 db = client.test
 homework1=db.homework
-homework1.count_documents({})
+homework1.count_documents()
 ```
 Output:
 ```
@@ -491,7 +491,7 @@ for i in x:
   i=homework1.insert_many([i])
   print(i)
   
-homework1.count_documents({})
+homework1.count_documents()
 ```
 Output:
 ```
@@ -510,7 +510,7 @@ db.homework....this collection shows the total and average of the homeework
 ```python
 db = client.test
 gtltexam=db.gt40_ltavg_exam
-gtltexam.count_documents({})
+gtltexam.count_documents()
 ```
 Output:
 ```
@@ -522,7 +522,7 @@ x=db.exam_collection.find({'scores.score':{'$gte':40,'$lt':48.67367075950175}})
 for i in x:
   i=gtltexam.insert_many([i])
   
-gtltexam.count_documents({})
+gtltexam.count_documents()
 ```
 Output:
 ```
@@ -532,7 +532,7 @@ Output:
 ```python
 db = client.test
 gtltquiz=db.gt40_ltavg_quiz
-gtltquiz.count_documents({})
+gtltquiz.count_documents()
 ```
 Output:
 ```
@@ -545,7 +545,7 @@ x=db.quiz_collection.find({'scores.score':{'$gte':40,'$lt':48.67367075950175}})
 for i in x:
   i=gtltquiz.insert_many([i])
   
-gtltquiz.count_documents({})
+gtltquiz.count_documents()
 ```
 Output:
 ```
@@ -555,7 +555,7 @@ Output:
 ```python
 db = client.test
 gtlthomework=db.gt40_ltavg_homework
-gtlthomework.count_documents({})
+gtlthomework.count_documents()
 ```
 Output:
 ```
@@ -568,7 +568,7 @@ x=db.homework_collection.find({'scores.score':{'$gte':40,'$lt':48.67367075950175
 for i in x:
   i=gtlthomework.insert_many([i])
   
-gtlthomework.count_documents({})
+gtlthomework.count_documents()
 ```
 Output:
 ```
@@ -586,7 +586,7 @@ db.gt40_ltavg_homework....this shows the collection which consists of students w
 ```python
 db = client.test
 ltfailexam=db.lt_fail_exam
-ltfailexam.count_documents({})
+ltfailexam.count_documents()
 ```
 Output:
 ```
@@ -599,7 +599,7 @@ x=db.exam_collection.find({'scores.score':{'$lt':1}})
 for i in x:
   i=ltfailexam.insert_many([i])
   
-ltfailexam.count_documents({})
+ltfailexam.count_documents()
 ```
 Output:
 ```
@@ -609,7 +609,7 @@ Output:
 ```python
 db = client.test
 ltfailquiz=db.lt_fail_quiz
-ltfailquiz.count_documents({})
+ltfailquiz.count_documents()
 ```
 Output:
 ```
@@ -622,7 +622,7 @@ x=db.quiz_collection.find({'scores.score':{'$lt':1}})
 for i in x:
   i=ltfailquiz.insert_many([i])
   
-ltfailquiz.count_documents({})
+ltfailquiz.count_documents()
 ```
 Output:
 ```
@@ -632,7 +632,7 @@ Output:
 ```python
 db = client.test
 ltfailhomework=db.lt_fail_homework
-ltfailhomework.count_documents({})
+ltfailhomework.count_documents()
 ```
 Output:
 ```
@@ -645,7 +645,7 @@ x=db.homework_collection.find({'scores.score':{'$lt':1}})
 for i in x:
   i=ltfailhomework.insert_many([i])
 
-ltfailhomework.count_documents({})
+ltfailhomework.count_documents()
 ```
 Output:
 ```
@@ -662,7 +662,7 @@ db.lt_fail_homework...this new collection which consists of students who scored 
 ```python
 db = client.test
 gtpassexam=db.gt_pass_exam
-gtpassexam.count_documents({})
+gtpassexam.count_documents()
 ```
 Output:
 ```
@@ -675,7 +675,7 @@ x=db.exam_collection.find({'scores.score':{'$gte':40}})
 for i in x:
   i=gtpassexam.insert_many([i])
   
-gtpassexam.count_documents({})
+gtpassexam.count_documents()
 ```
 Output:
 ```
@@ -685,7 +685,7 @@ Output:
 ```python
 db = client.test
 gtpassquiz=db.gt_pass_quiz
-gtpassquiz.count_documents({})
+gtpassquiz.count_documents()
 ```
 Output:
 ```
@@ -697,7 +697,7 @@ x=db.quiz_collection.find({'scores.score':{'$gte':40}})
 for i in x:
   i=gtpassquiz.insert_many([i])
   
-gtpassquiz.count_documents({})
+gtpassquiz.count_documents()
 ```
 Output:
 ```
@@ -707,7 +707,7 @@ Output:
 ```python
 db = client.test
 gtpasshomework=db.gt_pass_homework
-gtpasshomework.count_documents({})
+gtpasshomework.count_documents()
 ```
 Output:
 ```
@@ -719,7 +719,7 @@ x=db.homework_collection.find({'scores.score':{'$gte':40}})
 for i in x:
   i=gtpasshomework.insert_many([i])
   
-gtpasshomework.count_documents({})
+gtpasshomework.count_documents()
 ````
 Output:
 ```
@@ -879,137 +879,18 @@ Output:
 db.test_collection2.drop()
 ```
 
+## Support Language:
+* **[Python]** 
+
+[Python]: https://www.python.org/
 
 
+## NoSQl Server
+* **[MongoDB]**
+* **[MongoDB Atls Cloud]**
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-The Wasmtime CLI can be installed on Linux and macOS with a small install
-script:
-
-```sh
-curl https://wasmtime.dev/install.sh -sSf | bash
-```
-
-Windows or otherwise interested users can download installers and
-binaries directly from the [GitHub
-Releases](https://github.com/bytecodealliance/wasmtime/releases) page.
-
-## Example
-
-If you've got the [Rust compiler
-installed](https://www.rust-lang.org/tools/install) then you can take some Rust
-source code:
-
-```rust
-fn main() {
-    println!("Hello, world!");
-}
-```
-
-and compile/run it with:
-
-```sh
-$ rustup target add wasm32-wasi
-$ rustc hello.rs --target wasm32-wasi
-$ wasmtime hello.wasm
-Hello, world!
-```
-
-## Features
-
-* **Fast**. Wasmtime is built on the optimizing [Cranelift] code generator to
-  quickly generate high-quality machine code either at runtime or
-  ahead-of-time. Wasmtime is optimized for efficient instantiation, low-overhead
-  calls between the embedder and wasm, and scalability of concurrent instances.
-
-* **[Secure]**. Wasmtime's development is strongly focused on correctness and
-  security. Building on top of Rust's runtime safety guarantees, each Wasmtime
-  feature goes through careful review and consideration via an [RFC
-  process]. Once features are designed and implemented, they undergo 24/7
-  fuzzing donated by [Google's OSS Fuzz]. As features stabilize they become part
-  of a [release][release policy], and when things go wrong we have a
-  well-defined [security policy] in place to quickly mitigate and patch any
-  issues. We follow best practices for defense-in-depth and integrate
-  protections and mitigations for issues like Spectre. Finally, we're working to
-  push the state-of-the-art by collaborating with academic researchers to
-  formally verify critical parts of Wasmtime and Cranelift.
-
-* **[Configurable]**. Wasmtime uses sensible defaults, but can also be
-  configured to provide more fine-grained control over things like CPU and
-  memory consumption. Whether you want to run Wasmtime in a tiny environment or
-  on massive servers with many concurrent instances, we've got you covered.
-
-* **[WASI]**. Wasmtime supports a rich set of APIs for interacting with the host
-  environment through the [WASI standard](https://wasi.dev).
-
-* **[Standards Compliant]**. Wasmtime passes the [official WebAssembly test
-  suite](https://github.com/WebAssembly/testsuite), implements the [official C
-  API of wasm](https://github.com/WebAssembly/wasm-c-api), and implements
-  [future proposals to WebAssembly](https://github.com/WebAssembly/proposals) as
-  well. Wasmtime developers are intimately engaged with the WebAssembly
-  standards process all along the way too.
-
-[Wasmtime]: https://github.com/bytecodealliance/wasmtime
-[Cranelift]: https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/README.md
-[Google's OSS Fuzz]: https://google.github.io/oss-fuzz/
-[security policy]: https://bytecodealliance.org/security
-[RFC process]: https://github.com/bytecodealliance/rfcs
-[release policy]: https://docs.wasmtime.dev/stability-release.html
-[Secure]: https://docs.wasmtime.dev/security.html
-[Configurable]: https://docs.rs/wasmtime/latest/wasmtime/struct.Config.html
-[WASI]: https://docs.rs/wasmtime-wasi/latest/wasmtime_wasi/
-[Standards Compliant]: https://docs.wasmtime.dev/stability-wasm-proposals-support.html
-
-## Language Support
-
-You can use Wasmtime from a variety of different languages through embeddings of
-the implementation:
-
-* **[Rust]** - the [`wasmtime` crate]
-* **[C]** - the [`wasm.h`, `wasi.h`, and `wasmtime.h` headers][c-headers], [CMake](crates/c-api/CMakeLists.txt) or [`wasmtime` Conan package]
-* **C++** - the [`wasmtime-cpp` repository][wasmtime-cpp] or use [`wasmtime-cpp` Conan package]
-* **[Python]** - the [`wasmtime` PyPI package]
-* **[.NET]** - the [`Wasmtime` NuGet package]
-* **[Go]** - the [`wasmtime-go` repository]
-
-[Rust]: https://bytecodealliance.github.io/wasmtime/lang-rust.html
-[C]: https://bytecodealliance.github.io/wasmtime/examples-c-embed.html
-[`wasmtime` crate]: https://crates.io/crates/wasmtime
-[c-headers]: https://bytecodealliance.github.io/wasmtime/c-api/
-[Python]: https://bytecodealliance.github.io/wasmtime/lang-python.html
-[`wasmtime` PyPI package]: https://pypi.org/project/wasmtime/
-[.NET]: https://bytecodealliance.github.io/wasmtime/lang-dotnet.html
-[`Wasmtime` NuGet package]: https://www.nuget.org/packages/Wasmtime
-[Go]: https://bytecodealliance.github.io/wasmtime/lang-go.html
-[`wasmtime-go` repository]: https://pkg.go.dev/github.com/bytecodealliance/wasmtime-go
-[wasmtime-cpp]: https://github.com/bytecodealliance/wasmtime-cpp
-[`wasmtime` Conan package]: https://conan.io/center/wasmtime
-[`wasmtime-cpp` Conan package]: https://conan.io/center/wasmtime-cpp
-
-## Documentation
-
-[📚 Read the Wasmtime guide here! 📚][guide]
-
-The [wasmtime guide][guide] is the best starting point to learn about what
-Wasmtime can do for you or help answer your questions about Wasmtime. If you're
-curious in contributing to Wasmtime, [it can also help you do
-that][contributing]!
-
-[contributing]: https://bytecodealliance.github.io/wasmtime/contributing.html
-[guide]: https://bytecodealliance.github.io/wasmtime
+[MongoDB Atls Cloud]: https://cloud.mongodb.com/
+[MongoDB]: https://www.mongodb.com/
 
 ---
 
