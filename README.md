@@ -121,11 +121,11 @@ Output:
   {'score': 11.78273309957772, 'type': 'quiz'},
   {'score': 35.8740349954354, 'type': 'homework'}]}
 ```
----
+
 ## Now Let us Answer to the Questions
 
-## 1) Find the student name who scored maximum scores in all (exam, quiz and homework)?
-# student who score highest score in exam
+# 1) Find the student name who scored maximum scores in all (exam, quiz and homework)?
+## student who score highest score in exam
 ```python
 db = client.test
 exam=db.exam_collection              #Total no.of Exam documents count 
@@ -151,7 +151,7 @@ Output:
 ```
 {'_id': 136, 'name': 'Margart Vitello', 'scores': {'score': 99.33685767140612, 'type': 'exam'}}
 ```
-# student who score highest score in quiz
+## student who score highest score in quiz
 ```python
 db = client.test
 quiz=db.quiz_collection
@@ -177,7 +177,7 @@ Output:
 ```
 {'_id': 69, 'name': 'Cody Strouth', 'scores': {'score': 99.80348240553108, 'type': 'quiz'}}
 ```
-# student who score highest score in homework
+## student who score highest score in homework
 ```python
 db = client.test
 homework=db.homework_collection
@@ -215,10 +215,10 @@ we got know about
 ## max score in homework is 'Whitley Fears'
 {'_id': 178, 'name': 'Whitley Fears', 'scores': {'score': 99.77237745070993, 'type': 'homework'}}
 
----
-## 2)Find students who scored below average in the exam and pass mark is 40%?
 
-# first we need to find Avg score in Exam
+# 2)Find students who scored below average in the exam and pass mark is 40%?
+
+## first we need to find Avg score in Exam
 ```python
 
 x=db.exam_collection.aggregate([{'$group' : {'_id' : "null", "avg_exam" : {'$avg' : "$scores.score"}}}])
@@ -238,7 +238,7 @@ Output:
 ```
 104
 ```
-# To find less than/ below average score in Exam
+## To find less than/ below average score in Exam
 ```python
 lessavg.drop()
 
@@ -252,10 +252,10 @@ Output:
 ```
 104
 ```
----
-## 3) Find students who scored below pass mark and assigned them as fail, and above pass mark as pass in all the categories.
 
-# Students who Fail in EXAM
+# 3) Find students who scored below pass mark and assigned them as fail, and above pass mark as pass in all the categories.
+
+## Students who Fail in EXAM
 ```python
 db = client.test
 failexam=db.fail_exam
@@ -282,7 +282,7 @@ Output:
 ```
 81
 ```
-# Students who Pass in EXAM
+## Students who Pass in EXAM
 ```python
 db = client.test
 passexam=db.pass_exam
@@ -308,7 +308,7 @@ Output:
 ```
 119
 ```
-# Students who Fail in Quiz
+## Students who Fail in Quiz
 ```python
 db = client.test
 failquiz=db.fail_quiz
@@ -334,7 +334,7 @@ Output:
 ```
 86
 ```
-# Students who Pass in Quiz
+## Students who Pass in Quiz
 ```python
 db = client.test
 passquiz=db.pass_quiz
@@ -360,7 +360,7 @@ Output:
 ```
 114
 ```
-# Students who fail in Homework
+## Students who fail in Homework
 ```python
 db = client.test
 failhomework=db.fail_homework
@@ -387,7 +387,7 @@ Output:
 ```
 29
 ```
-# Students who Pass Home work
+## Students who Pass Home work
 ```python
 db = client.test
 passhomework=db.pass_homework
@@ -414,12 +414,13 @@ Output:
 171
 ```
 Now Here,
-#db.fail_exam, db.fail_quiz, db.fail_homework....shows who scored below passmark and assingned the collection as fail in all the categories
-#db.pass_exam, db.pass_quiz, db.pass_homework....shows who scored above passmark and assingned the collection as pass in all the categories
----
-## 4) Find the total and average of the exam, quiz and homework and store them in a separate collection.
 
-# Total and Average of Exam 
+db.fail_exam, db.fail_quiz, db.fail_homework....shows who scored below passmark and assingned the collection as fail in all the categories
+db.pass_exam, db.pass_quiz, db.pass_homework....shows who scored above passmark and assingned the collection as pass in all the categories
+
+# 4) Find the total and average of the exam, quiz and homework and store them in a separate collection.
+
+## Total and Average of Exam 
 ```python
 db = client.test
 exam1=db.exam
@@ -450,7 +451,7 @@ Output:
 ```
 2
 ```
-# Total and Average of Quiz
+## Total and Average of Quiz
 ```pythoon
 db = client.test
 quiz1=db.quiz
@@ -481,7 +482,7 @@ Output:
 ```
 2
 ```
-# Total and Average for Homework
+## Total and Average for Homework
 ```python
 db = client.test
 homework1=db.homework
@@ -514,13 +515,14 @@ Output:
 ```
 Here,
 Now we can find using this code to show related seperate collection.
-# db.exam....this collection shows the total and average of the exam
-# db.quiz....this collection shows the total and average of the quiz 
-# db.homework....this collection shows the total and average of the homeework
----
 
-## 5) Create a new collection which consists of students who scored below average and above 40% in all the categories.
-# New Collection for EXAM
+db.exam....this collection shows the total and average of the exam
+db.quiz....this collection shows the total and average of the quiz 
+db.homework....this collection shows the total and average of the homeework
+
+
+# 5) Create a new collection which consists of students who scored below average and above 40% in all the categories.
+## New Collection for EXAM
 ```python
 db = client.test
 gtltexam=db.gt40_ltavg_exam
@@ -542,7 +544,7 @@ Output:
 ```
 23
 ```
-# New Collection for Quiz
+## New Collection for Quiz
 ```python
 db = client.test
 gtltquiz=db.gt40_ltavg_quiz
@@ -565,7 +567,7 @@ Output:
 ```
 19
 ```
-# New Collection for Homework
+## New Collection for Homework
 ```python
 db = client.test
 gtlthomework=db.gt40_ltavg_homework
@@ -589,15 +591,161 @@ Output:
 14
 ```
 Here,
-we can
+this are the collections that created
 
-#db.gt40_ltavg_exam....this shows the collection which consists of students who scored below average and above 40% in exam.
-#db.gt40_ltavg_quiz....this shows the collection which consists of students who scored below average and above 40% in quiz.
-#db.gt40_ltavg_homework....this shows the collection which consists of students who scored below average and above 40% in homework.
----
-## 6) Create a new collection which consists of students who scored below the fail mark in all the categories.
+db.gt40_ltavg_exam....this shows the collection which consists of students who scored below average and above 40% in exam.
+db.gt40_ltavg_quiz....this shows the collection which consists of students who scored below average and above 40% in quiz.
+db.gt40_ltavg_homework....this shows the collection which consists of students who scored below average and above 40% in homework.
 
+# 6) Create a new collection which consists of students who scored below the fail mark in all the categories.
+## New collection for Exam
+```python
+db = client.test
+ltfailexam=db.lt_fail_exam
+ltfailexam.count_documents({})
+```
+Output:
+```
+3
+```
+```python
+ltfailexam.drop()
 
+x=db.exam_collection.find({'scores.score':{'$lt':1}})
+for i in x:
+  i=ltfailexam.insert_many([i])
+  
+ltfailexam.count_documents({})
+```
+Output:
+```
+3
+```
+## New collection for Quiz
+```python
+db = client.test
+ltfailquiz=db.lt_fail_quiz
+ltfailquiz.count_documents({})
+```
+Output:
+```
+0
+```
+```python
+ltfailquiz.drop()
+
+x=db.quiz_collection.find({'scores.score':{'$lt':1}})
+for i in x:
+  i=ltfailquiz.insert_many([i])
+  
+ltfailquiz.count_documents({})
+```
+Output:
+```
+5
+```
+## New collection for Homework
+```python
+db = client.test
+ltfailhomework=db.lt_fail_homework
+ltfailhomework.count_documents({})
+```
+Output:
+```
+0
+```
+```python
+ltfailhomework.drop()
+
+x=db.homework_collection.find({'scores.score':{'$lt':1}})
+for i in x:
+  i=ltfailhomework.insert_many([i])
+
+ltfailhomework.count_documents({})
+```
+Output:
+```
+0
+```
+Here,
+
+db.lt_fail_exam...this new collection which consists of students who scored below the fail mark in exam
+db.lt_fail_quiz...this new collection which consists of students who scored below the fail mark in quiz
+db.lt_fail_homework...this new collection which consists of students who scored below the fail mark in homework
+
+# 7) Create a new collection which consists of students who scored above pass mark in all the categories.
+## New collection for Exam
+```python
+db = client.test
+gtpassexam=db.gt_pass_exam
+gtpassexam.count_documents({})
+```
+Output:
+```
+119
+```
+```python
+gtpassexam.drop()
+
+x=db.exam_collection.find({'scores.score':{'$gte':40}})
+for i in x:
+  i=gtpassexam.insert_many([i])
+  
+gtpassexam.count_documents({})
+```
+Output:
+```
+119
+```
+## New collection for QUIZ
+```python
+db = client.test
+gtpassquiz=db.gt_pass_quiz
+gtpassquiz.count_documents({})
+```
+Output:
+```
+114
+```
+```python
+gtpassquiz.drop()
+x=db.quiz_collection.find({'scores.score':{'$gte':40}})
+for i in x:
+  i=gtpassquiz.insert_many([i])
+  
+gtpassquiz.count_documents({})
+```
+Output:
+```
+114
+```
+## new collection for Homework:
+```python
+db = client.test
+gtpasshomework=db.gt_pass_homework
+gtpasshomework.count_documents({})
+```
+Output:
+```
+171
+```
+```
+gtpasshomework.drop()
+x=db.homework_collection.find({'scores.score':{'$gte':40}})
+for i in x:
+  i=gtpasshomework.insert_many([i])
+  
+gtpasshomework.count_documents({})
+````
+Output:
+```
+171
+```
+Here, this are the collections that are created
+
+db.gt_pass_exam.......this new collection which consists of students who scored above pass mark in exam
+db.gt_pass_quiz.......this new collection which consists of students who scored above pass mark in quiz
+db.gt_pass_homework...this new collection which consists of students who scored above pass mark in homework
 
 
 
